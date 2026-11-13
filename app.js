@@ -2193,6 +2193,21 @@ async function addFamilyFiles(files) {
   if (done.length) toast(`넣었어요 — ${done.join(', ')}`);
   if (fail.length) setTimeout(() => alert(fail.join('\n')), done.length ? 300 : 0);
 }
+// 시험용 가족 2명: 실제 받은 파일과 똑같은 모양을 만들어 readShare로 넣음 (지금 보고 있는 달에 들어감)
+async function loadFamilyDemo() {
+  const m = $('month').value, now = new Date().toISOString();
+  const demo = (id, owner, avatar, inc, exp) => ({ kind: SHARE_KIND, version: 1, ledgerId: id, owner, avatar, users: [owner],
+    exported: now, items: [
+      { id: id + 'i', date: `${m}-01`, type: 'income', category: inc[0], user: 0, memo: inc[1], amount: inc[2] },
+      { id: id + 'e', date: `${m}-02`, type: 'expense', category: exp[0], user: 0, memo: exp[1], amount: exp[2] }] });
+  const list = [
+    demo('LtestDemoA01', '시험-엄마', '', ['급여', '시험용 월급', 2500000], ['식비', '시험용 장보기', 85000]),
+    demo('LtestDemoB02', '시험-아빠', '', ['급여', '시험용 월급', 3000000], ['교통/자동차', '시험용 주유', 60000])];
+  const done = list.map(readShare).filter(r => r.ok).map(r => r.msg);
+  await saveFamily(); renderFamily();
+  toast(`시험용으로 넣었어요 — ${done.join(', ')}`);
+}
+$('famDemo').onclick = loadFamilyDemo;
 $('famShare').onclick = shareMine;
 $('shareMine').onclick = shareMine;
 $('famFile').addEventListener('change', e => { const fs = [...e.target.files]; e.target.value = ''; if (fs.length) addFamilyFiles(fs); });
