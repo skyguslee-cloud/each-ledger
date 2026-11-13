@@ -1,0 +1,19 @@
+{
+  "id": "./",
+  "name": "우리집 가계부 (각자)",
+  "short_name": "각자가계부",
+  "description": "각자 휴대폰에 적고, 파일을 모아 가족 전체를 함께 보는 가계부",
+  "lang": "ko",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f6f6f6",
+  "theme_color": "#0a0a0a",
+  "categories": ["finance"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
